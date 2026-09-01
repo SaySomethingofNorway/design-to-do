@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One Human Race — Designer Working Plan · SaySomething</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:#FF6B00;
+    --pink:#FF1493;
+    --ink:#181410;
+    --ink-soft:#5c554e;
+    --paper:#FBF9F7;
+    --line:#e2dcd5;
+    --panel:#F3EFEB;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Barlow',system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.62;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+  }
+  .lang-no{display:none}
+  html[data-lang="no"] .lang-en{display:none}
+  html[data-lang="no"] .lang-no{display:inline}
+  html[data-lang="no"] p.lang-no,
+  html[data-lang="no"] li.lang-no,
+  html[data-lang="no"] div.lang-no,
+  html[data-lang="no"] td.lang-no,
+  html[data-lang="no"] span.lang-no{display:revert}
+
+  /* ---------- masthead ---------- */
+  header.masthead{
+    border-bottom:3px solid var(--ink);
+    padding:26px 0 0;
+  }
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+  .mast-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+  .org{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    font-size:19px;
+    letter-spacing:.02em;
+  }
+  .org span{color:var(--orange)}
+  .toggle{display:flex;border:1.5px solid var(--ink);border-radius:2px;overflow:hidden}
+  .toggle button{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:15px;font-weight:600;letter-spacing:.04em;
+    background:transparent;border:0;padding:6px 14px;cursor:pointer;color:var(--ink);
+  }
+  .toggle button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+  .toggle button:focus-visible{outline:2px solid var(--pink);outline-offset:-2px}
+
+  h1{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;
+    font-size:clamp(2.9rem,8vw,5.6rem);
+    line-height:.94;
+    margin:34px 0 0;
+    letter-spacing:-.015em;
+    text-transform:none;
+  }
+  h1 .rule{display:block;color:var(--orange)}
+  .mast-meta{
+    display:flex;flex-wrap:wrap;gap:0;
+    margin:30px 0 0;
+    border-top:1px solid var(--line);
+  }
+  .mast-meta div{
+    flex:1 1 200px;padding:14px 20px 16px 0;font-size:14.5px;color:var(--ink-soft);
+  }
+  .mast-meta strong{display:block;color:var(--ink);font-weight:600;font-size:15.5px}
+
+  /* ---------- layout ---------- */
+  .shell{display:grid;grid-template-columns:216px 1fr;gap:56px;max-width:1160px;margin:0 auto;padding:0 28px 100px}
+  nav.index{
+    position:sticky;top:24px;align-self:start;
+    padding-top:44px;font-size:14.5px;line-height:1.45;
+  }
+  nav.index ol{list-style:none;margin:0;padding:0;counter-reset:nav}
+  nav.index li{counter-increment:nav;margin-bottom:11px;display:flex;gap:9px}
+  nav.index li::before{content:counter(nav);color:var(--orange);font-variant-numeric:tabular-nums;font-weight:600;min-width:13px}
+  nav.index a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid transparent}
+  nav.index a:hover,nav.index a:focus{color:var(--ink);border-bottom-color:var(--orange)}
+  main{padding-top:44px;min-width:0;max-width:70ch}
+
+  section{margin-bottom:64px;scroll-margin-top:22px}
+  h2{
+    font-family:'Barlow Condensed',sans-serif;
+    font-weight:700;font-size:clamp(1.65rem,3.4vw,2.3rem);
+    line-height:1.06;margin:0 0 4px;letter-spacing:-.01em;
+  }
+  .sec-num{
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;
+    font-size:15px;color:var(--orange);display:block;margin-bottom:2px;
+    font-variant-numeric:tabular-nums;
+  }
+  h2 + .lede{font-size:18.5px;color:var(--ink-soft);margin:10px 0 24px;font-weight:300}
+  h3{
+    font-family:'Barlow Condensed',sans-serif;font-weight:600;
+    font-size:1.28rem;margin:34px 0 6px;line-height:1.2;
+  }
+  h4{font-family:'Barlow',sans-serif;font-size:16px;font-weight:600;margin:22px 0 4px}
+  p{margin:0 0 15px}
+  a{color:var(--ink)}
+  ul{padding-left:20px;margin:0 0 16px}
+  li{margin-bottom:7px}
+  strong{font-weight:600}
+  .hr{border:0;border-top:1px solid var(--line);margin:0 0 34px}
+
+  /* ---------- devices ---------- */
+  .flag{
+    border-left:4px solid var(--pink);
+    background:#fff;
+    padding:16px 20px;
+    margin:0 0 22px;
+  }
+  .flag p:last-child{margin-bottom:0}
+  .flag .flag-label{
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;
+    color:var(--pink);display:block;margin-bottom:3px;
+  }
+  .rule-list{list-style:none;padding:0}
+  .rule-list li{
+    padding:11px 0 11px 0;border-top:1px solid var(--line);margin:0;
+  }
+  .rule-list li:last-child{border-bottom:1px solid var(--line)}
+  .copyblock{
+    background:var(--ink);color:#F7F3EF;padding:22px 24px;margin:0 0 18px;
+    font-size:17.5px;line-height:1.5;
+  }
+  .copyblock .co{color:var(--orange);font-weight:600}
+  .copyblock .cta-line{color:#F7F3EF;opacity:.72;display:block;margin-top:10px;font-size:16px}
+  .copyblock p{margin:0 0 8px}
+  .copyblock p:last-child{margin:0}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+  .chip{
+    border:1px solid var(--line);background:#fff;padding:5px 12px;font-size:15px;
+  }
+  table{border-collapse:collapse;width:100%;margin:6px 0 20px;font-size:15.5px}
+  th,td{text-align:left;padding:9px 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+  th{
+    font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;
+    border-bottom:1.5px solid var(--ink);
+  }
+  td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  code{
+    font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14.5px;
+    background:var(--panel);padding:1px 5px;word-break:break-word;
+  }
+  .phase{border-top:2px solid var(--orange);padding-top:16px;margin-bottom:36px}
+  .phase-when{
+    font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;
+    color:var(--orange);margin:0 0 2px;
+  }
+
+  /* ---------- checklists ---------- */
+  .owner{margin-bottom:32px}
+  .owner-name{
+    font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.3rem;
+    margin:0 0 2px;
+  }
+  .owner-role{font-size:14.5px;color:var(--ink-soft);margin:0 0 12px}
+  .check{list-style:none;padding:0;margin:0}
+  .check li{border-top:1px solid var(--line);margin:0}
+  .check li:last-child{border-bottom:1px solid var(--line)}
+  .check label{display:flex;gap:12px;align-items:flex-start;padding:10px 0;cursor:pointer}
+  .check input{
+    appearance:none;width:17px;height:17px;margin:5px 0 0;flex:0 0 auto;
+    border:1.5px solid var(--ink);border-radius:2px;background:#fff;cursor:pointer;
+  }
+  .check input:checked{background:var(--orange);border-color:var(--orange)}
+  .check input:checked::after{
+    content:"";display:block;width:4px;height:9px;border:solid #fff;
+    border-width:0 2px 2px 0;transform:rotate(45deg);margin:1px 0 0 5px;
+  }
+  .check input:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+  .check input:checked ~ .task{opacity:.45;text-decoration:line-through}
+  .task{font-size:16px;line-height:1.5}
+
+  .q-list{counter-reset:q;list-style:none;padding:0}
+  .q-list li{counter-increment:q;display:flex;gap:12px;margin-bottom:13px}
+  .q-list li::before{
+    content:counter(q);font-family:'Barlow Condensed',sans-serif;font-weight:700;
+    color:var(--pink);font-size:17px;min-width:14px;
+  }
+
+  footer{border-top:3px solid var(--ink);padding:22px 0 60px;font-size:14.5px;color:var(--ink-soft)}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  @media (max-width:860px){
+    .shell{grid-template-columns:1fr;gap:0}
+    nav.index{position:static;padding-top:30px;border-bottom:1px solid var(--line);padding-bottom:22px}
+    nav.index ol{columns:2;column-gap:24px}
+    nav.index li{break-inside:avoid}
+    main{padding-top:30px}
+    body{font-size:16.5px}
+  }
+  @media print{
+    nav.index,.toggle{display:none}
+    body{background:#fff;font-size:11pt}
+    .shell{grid-template-columns:1fr;padding-bottom:0}
+    section{page-break-inside:avoid}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-top">
+      <div class="org">Say<span>Something</span></div>
+      <div class="toggle" role="group" aria-label="Language">
+        <button type="button" id="btn-en" aria-pressed="true" onclick="setLang('en')">English</button>
+        <button type="button" id="btn-no" aria-pressed="false" onclick="setLang('no')">Norsk</button>
+      </div>
+    </div>
+
+    <h1>
+      <span class="lang-en">One Human Race<span class="rule">Designer working plan</span></span>
+      <span class="lang-no">One Human Race<span class="rule">Arbeidsplan for designer</span></span>
+    </h1>
+
+    <div class="mast-meta">
+      <div>
+        <strong>v9 · 1 September 2026</strong>
+        <span class="lang-en">Internal working document</span>
+        <span class="lang-no">Internt arbeidsdokument</span>
+      </div>
+      <div>
+        <strong class="lang-en">Launch 1 October 2026</strong>
+        <strong class="lang-no">Lansering 1. oktober 2026</strong>
+        <span class="lang-en">Four weeks from today</span>
+        <span class="lang-no">Fire uker fra i dag</span>
+      </div>
+      <div>
+        <strong>Roy Arne Hansen</strong>
+        <span class="lang-en">Owner, approvals · roy@saysomething.no</span>
+        <span class="lang-no">Eier, godkjenning · roy@saysomething.no</span>
+      </div>
+      <div>
+        <strong>Frode Melletun</strong>
+        <span class="lang-en">Sales, sponsors · frode@saysomething.no</span>
+        <span class="lang-no">Salg, sponsorer · frode@saysomething.no</span>
+      </div>
+      <div>
+        <strong>Hudson</strong>
+        <span class="lang-en">Ad placement, AI tooling</span>
+        <span class="lang-no">Annonseplassering, AI-verktøy</span>
+      </div>
+      <div>
+        <strong>Yolanda Queiroz Soto</strong>
+        <span class="lang-en">Co-founder, main partners · yolanda@saysomething.no</span>
+        <span class="lang-no">Medgrunnlegger, hovedpartnere · yolanda@saysomething.no</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+
+  <nav class="index" aria-label="Contents">
+    <ol>
+      <li><a href="#job"><span class="lang-en">The job</span><span class="lang-no">Oppdraget</span></a></li>
+      <li><a href="#rules"><span class="lang-en">Non-negotiables</span><span class="lang-no">Ufravikelige krav</span></a></li>
+      <li><a href="#copy"><span class="lang-en">Approved copy</span><span class="lang-no">Godkjent tekst</span></a></li>
+      <li><a href="#phase1"><span class="lang-en">Sales ammunition</span><span class="lang-no">Salgsmateriell</span></a></li>
+      <li><a href="#phase2"><span class="lang-en">Production system</span><span class="lang-no">Produksjonssystem</span></a></li>
+      <li><a href="#phase3"><span class="lang-en">Merch &amp; portal</span><span class="lang-no">Merch og portal</span></a></li>
+      <li><a href="#timeline"><span class="lang-en">Timeline</span><span class="lang-no">Tidsplan</span></a></li>
+      <li><a href="#todo"><span class="lang-en">Who does what</span><span class="lang-no">Hvem gjør hva</span></a></li>
+      <li><a href="#open"><span class="lang-en">Decisions and what remains</span><span class="lang-no">Beslutninger og det som står igjen</span></a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 1 -->
+    <section id="job">
+      <span class="sec-num">01</span>
+      <h2><span class="lang-en">The job</span><span class="lang-no">Oppdraget</span></h2>
+      <p class="lede lang-en">Every krone a partner pays buys two things: a place in a movement, and 50% of their contribution spent on joint online advertising that drives traffic to the campaign landing page.</p>
+      <p class="lede lang-no">Hver krone en partner betaler kjøper to ting: en plass i en bevegelse, og 50 % av bidraget brukt på felles annonsering på nett som sender trafikk til kampanjens landingsside.</p>
+
+      <p class="lang-en">The designer's job is to make that promise visible. First as <em>examples</em> the sales team can put on screen in a pitch. Then as <em>production</em> for each partner who signs. Then as merch and partner-portal material that lets a partner prove publicly that they are part of it.</p>
+      <p class="lang-no">Designerens jobb er å gjøre dette løftet synlig. Først som <em>eksempler</em> salgsteamet kan vise på skjerm i et møte. Deretter som <em>produksjon</em> for hver partner som signerer. Til slutt som merch og partnerportal-materiell som gjør at en partner kan vise offentlig at de er med.</p>
+
+      <p class="lang-en">The priority order is strict. Nothing in phase two starts before phase one is delivered.</p>
+      <p class="lang-no">Prioriteringsrekkefølgen er streng. Ingenting i fase to starter før fase én er levert.</p>
+
+      <ol>
+        <li><strong class="lang-en">Sales ammunition</strong><strong class="lang-no">Salgsmateriell</strong> — <span class="lang-en">needed now. Blocks revenue.</span><span class="lang-no">trengs nå. Blokkerer inntekt.</span></li>
+        <li><strong class="lang-en">Production system</strong><strong class="lang-no">Produksjonssystem</strong> — <span class="lang-en">per-partner ad sets from a template. Needed at launch.</span><span class="lang-no">annonsesett per partner fra en mal. Trengs ved lansering.</span></li>
+        <li><strong class="lang-en">Merch and partner portal</strong><strong class="lang-no">Merch og partnerportal</strong> — <span class="lang-en">after launch, but order proofs now.</span><span class="lang-no">etter lansering, men bestill prøver nå.</span></li>
+      </ol>
+    </section>
+
+    <hr class="hr">
+
+    <!-- 2 -->
+    <section id="rules">
+      <span class="sec-num">02</span>
+      <h2><span class="lang-en">Non-negotiables</span><span class="lang-no">Ufravikelige krav</span></h2>
+
+      <h3><span class="lang-en">Brand</span><span class="lang-no">Merkevare</span></h3>
+      <ul class="rule-list">
+        <li><span class="lang-en">The name is always <strong>SaySomething</strong> — one word, no space. Never “Say Something”.</span><span class="lang-no">Navnet skrives alltid <strong>SaySomething</strong> — ett ord, uten mellomrom. Aldri «Say Something».</span></li>
+        <li><span class="lang-en">Orange <code>#FF6B00</code> · Hot pink <code>#FF1493</code>. No other accent colours.</span><span class="lang-no">Oransje <code>#FF6B00</code> · Rosa <code>#FF1493</code>. Ingen andre aksentfarger.</span></li>
+        <li><span class="lang-en">Headings in <strong>Barlow Condensed</strong>, body in <strong>Barlow</strong>. No substitutes.</span><span class="lang-no">Overskrifter i <strong>Barlow Condensed</strong>, brødtekst i <strong>Barlow</strong>. Ingen erstatninger.</span></li>
+        <li><span class="lang-en">Hashtags: <code>#OneHumanRace</code> primary, <code>#99PercentTheSame</code> and <code>#DismantleTheFiction</code> secondary.</span><span class="lang-no">Emneknagger: <code>#OneHumanRace</code> primær, <code>#99PercentTheSame</code> og <code>#DismantleTheFiction</code> sekundær.</span></li>
+      </ul>
+
+      <h3><span class="lang-en">Claims</span><span class="lang-no">Påstander</span></h3>
+      <ul class="rule-list">
+        <li><span class="lang-en">Never invent a statistic, quote, endorsement or partner name. Not even in a mockup — mockups get screenshotted and forwarded.</span><span class="lang-no">Aldri oppdikt statistikk, sitater, støtteerklæringer eller partnernavn. Ikke engang i en skisse — skisser blir skjermdumpet og videresendt.</span></li>
+        <li><span class="lang-en">Placeholder companies must be obviously fictional (“BEDRIFT AS”, “COMPANY X”) or a real company with written permission.</span><span class="lang-no">Fiktive selskaper må være åpenbart fiktive («BEDRIFT AS», «COMPANY X») eller et reelt selskap med skriftlig tillatelse.</span></li>
+        <li><span class="lang-en">Do not reuse the “247 people have already joined” figure from the landing page in any ad. Either it is live and verified, or it is out.</span><span class="lang-no">Ikke gjenbruk tallet «247 har allerede blitt med» fra landingssiden i annonser. Enten er det live og verifisert, eller så er det ute.</span></li>
+      </ul>
+
+      <h3><span class="lang-en">Partner tiers — the live set</span><span class="lang-no">Partnernivåer — settet som gjelder</span></h3>
+      <p class="lang-en">Five tiers in NOK. This is the only set. Any earlier USD list in older project files is dead — do not design from it.</p>
+      <p class="lang-no">Fem nivåer i NOK. Dette er det eneste settet. Eventuelle tidligere USD-lister i gamle prosjektfiler er utgått — ikke design fra dem.</p>
+      <table>
+        <thead>
+          <tr>
+            <th><span class="lang-en">Tier</span><span class="lang-no">Nivå</span></th>
+            <th><span class="lang-en">Amount</span><span class="lang-no">Beløp</span></th>
+            <th><span class="lang-en">Reach</span><span class="lang-no">Rekkevidde</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Neighbour</td><td class="num">kr 10 000</td><td><span class="lang-en">Local</span><span class="lang-no">Lokalt</span></td></tr>
+          <tr><td>Village</td><td class="num">kr 50 000</td><td><span class="lang-en">Local+</span><span class="lang-no">Lokalt+</span></td></tr>
+          <tr><td>Ally</td><td class="num">kr 100 000</td><td><span class="lang-en">Regional</span><span class="lang-no">Regionalt</span></td></tr>
+          <tr><td>Champion</td><td class="num">kr 250 000</td><td><span class="lang-en">National</span><span class="lang-no">Nasjonalt</span></td></tr>
+          <tr><td>Founding Partner</td><td class="num">kr 500 000+</td><td><span class="lang-en">Global</span><span class="lang-no">Globalt</span></td></tr>
+        </tbody>
+      </table>
+      <p class="lang-en">At every tier, 50% of the contribution goes to joint online marketing. That line appears on every tier graphic.</p>
+      <p class="lang-no">På alle nivåer går 50 % av bidraget til felles markedsføring på nett. Den linjen står på all nivågrafikk.</p>
+      <div class="flag">
+        <span class="flag-label lang-en">First job on the tier graphic: fix the colours</span>
+        <span class="flag-label lang-no">Første jobb på nivågrafikken: rett fargene</span>
+        <p class="lang-en">The existing tier cards use five unrelated colours — a blue, a green, a near-orange, a plum and a magenta — none of which are the brand colours. Orange is rendered as <code>#FF6600</code> rather than <code>#FF6B00</code>, and pink as <code>#FF2D78</code> rather than <code>#FF1493</code>. Rebuild the tiers in the two brand colours with weight, tint and scale carrying the hierarchy instead of hue. Five arbitrary colours make the tiers look like a pricing table from a different company.</p>
+        <p class="lang-no">Dagens nivåkort bruker fem urelaterte farger — en blå, en grønn, en nesten-oransje, en plommefarge og en magenta — der ingen er merkefargene. Oransje er gjengitt som <code>#FF6600</code> i stedet for <code>#FF6B00</code>, og rosa som <code>#FF2D78</code> i stedet for <code>#FF1493</code>. Bygg nivåene på nytt i de to merkefargene, og la vekt, tonedybde og størrelse bære hierarkiet framfor kulør. Fem tilfeldige farger får nivåene til å se ut som en prisliste fra et annet selskap.</p>
+      </div>
+
+      <h3><span class="lang-en">Keep the brands separate</span><span class="lang-no">Hold merkevarene atskilt</span></h3>
+      <p class="lang-en">The Fritt Ord public conversation series <em>“How Should Norway Talk to Its Children About Race?”</em> is a separate workstream with separate branding. No One Human Race assets carry it, and none of its material carries ours.</p>
+      <p class="lang-no">Fritt Ord-serien <em>«Hvordan skal Norge snakke med barna sine om rase?»</em> er et eget spor med egen profil. Ingen One Human Race-elementer bærer den, og dens materiell bærer ikke vår.</p>
+
+      <h3><span class="lang-en">Rights</span><span class="lang-no">Rettigheter</span></h3>
+      <p class="lang-en">No stock photo, typeface or music goes into an ad without a licence that covers paid social <em>and</em> partner co-branding. Partner logos require written sign-off from the partner before publication — put it in the partner agreement, not in an email afterwards.</p>
+      <p class="lang-no">Ingen bildebank-foto, skrifttype eller musikk inn i en annonse uten lisens som dekker betalt sosialt <em>og</em> samprofilering med partner. Partnerlogoer krever skriftlig godkjenning fra partneren før publisering — legg det inn i partneravtalen, ikke i en e-post i etterkant.</p>
+    </section>
+
+    <hr class="hr">
+
+    <!-- 3 -->
+    <section id="copy">
+      <span class="sec-num">03</span>
+      <h2><span class="lang-en">Approved copy</span><span class="lang-no">Godkjent tekst</span></h2>
+      <p class="lede lang-en">Use these lines as written. Do not paraphrase the science.</p>
+      <p class="lede lang-no">Bruk disse linjene som de står. Ikke omskriv vitenskapen.</p>
+
+      <div class="flag">
+        <span class="flag-label lang-en">Why the original line was changed</span>
+        <span class="flag-label lang-no">Hvorfor den opprinnelige linjen ble endret</span>
+        <p class="lang-en">The first draft read “the scientific fact that there is only one human race.” The genome finding is that race has <em>no biological basis</em> — sorting humans into races is not supported by science. “One human race” is our reframing built on top of that finding, not the finding itself. Written as a scientific fact, a hostile journalist can call it an overstatement, and the doubt spreads to everything else we say. Lead with the number and let the conclusion follow.</p>
+        <p class="lang-no">Første utkast sa «det vitenskapelige faktum at det bare finnes én menneskerase». Funnet fra genomforskningen er at rase <em>ikke har noe biologisk grunnlag</em> — å sortere mennesker i raser har ikke vitenskapelig støtte. «Én menneskerase» er vår omformulering bygget på dette funnet, ikke funnet selv. Formulert som et vitenskapelig faktum kan en kritisk journalist kalle det en overdrivelse, og tvilen sprer seg til alt annet vi sier. Led med tallet og la konklusjonen følge.</p>
+      </div>
+
+      <h3><span class="lang-en">Main ad copy — English</span><span class="lang-no">Hovedtekst annonse — engelsk</span></h3>
+      <div class="copyblock">
+        <p>Humans share 99.9% of their DNA. There are no biological races — only one human race.</p>
+        <p><span class="co">[COMPANY X]</span> stands behind the science, and behind speaking as if it were true.</p>
+        <span class="cta-line">Be part of the solution. Become an advocate for One Human Race.</span>
+      </div>
+
+      <h3><span class="lang-en">Main ad copy — Norwegian</span><span class="lang-no">Hovedtekst annonse — norsk</span></h3>
+      <div class="copyblock">
+        <p>Mennesker deler 99,9 % av DNA-et sitt. Biologiske raser finnes ikke — det finnes én menneskerase.</p>
+        <p><span class="co">[BEDRIFT AS]</span> står bak vitenskapen, og bak å snakke som om den gjelder.</p>
+        <span class="cta-line">Bli en del av løsningen. Bli forkjemper for One Human Race.</span>
+      </div>
+
+      <h3><span class="lang-en">Short lines for small formats</span><span class="lang-no">Korte linjer for små formater</span></h3>
+      <div class="chips">
+        <span class="chip lang-en">99.9% the same. 100% equal.</span>
+        <span class="chip lang-en">Racism is real. Races are not.</span>
+        <span class="chip lang-en">The genome doesn’t lie.</span>
+        <span class="chip lang-en">One race. The human race.</span>
+        <span class="chip lang-no">99,9 % like. 100 % likeverdige.</span>
+        <span class="chip lang-no">Rasisme er reelt. Raser er det ikke.</span>
+        <span class="chip lang-no">Genomet lyver ikke.</span>
+        <span class="chip lang-no">Én rase. Menneskerasen.</span>
+      </div>
+
+      <h4><span class="lang-en">Calls to action</span><span class="lang-no">Handlingsoppfordringer</span></h4>
+      <p class="lang-en">English: <strong>Take the pledge</strong> · <strong>Become an advocate</strong>. Norwegian: <strong>Avlegg løftet</strong> · <strong>Bli forkjemper</strong>.</p>
+      <p class="lang-no">Norsk: <strong>Avlegg løftet</strong> · <strong>Bli forkjemper</strong>. Engelsk: <strong>Take the pledge</strong> · <strong>Become an advocate</strong>.</p>
+
+      <p class="lang-en">All copy is signed off by Roy before it goes into a layout. Norwegian copy gets a separate native proofread — the designer is not the proofreader.</p>
+      <p class="lang-no">All tekst godkjennes av Roy før den går inn i en layout. Norsk tekst korrekturleses separat av en morsmålsbruker — designeren er ikke korrekturleser.</p>
+    </section>
+
+    <hr class="hr">
+
+    <!-- 4 -->
+    <section id="phase1">
+      <span class="sec-num">04</span>
+      <h2><span class="lang-en">Phase one: sales ammunition</span><span class="lang-no">Fase én: salgsmateriell</span></h2>
+      <p class="phase-when"><span class="lang-en">Due end of week one · T-minus 4 weeks</span><span class="lang-no">Frist slutten av uke én · T-minus 4 uker</span></p>
+      <p class="lang-en">Frode and the sales team need something to put on screen that answers the only question a prospect really asks: what will this look like for us? Build one obviously fictional partner and one plausible sector mock — a bank, a grocery chain, a municipality — so the prospect can see themselves in it.</p>
+      <p class="lang-no">Frode og salgsteamet trenger noe å vise på skjerm som besvarer det eneste spørsmålet en kunde egentlig stiller: hvordan vil dette se ut for oss? Lag én åpenbart fiktiv partner og én troverdig bransjeskisse — en bank, en dagligvarekjede, en kommune — så kunden kan se seg selv i det.</p>
+
+      <div class="phase">
+        <h3>1.1 <span class="lang-en">Joint ad example set</span><span class="lang-no">Eksempelsett felles annonser</span></h3>
+        <table>
+          <thead>
+            <tr>
+              <th><span class="lang-en">Format</span><span class="lang-no">Format</span></th>
+              <th><span class="lang-en">Size</span><span class="lang-no">Størrelse</span></th>
+              <th><span class="lang-en">Count</span><span class="lang-no">Antall</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="lang-en">Meta feed, square</span><span class="lang-no">Meta feed, kvadrat</span></td><td class="num">1080 × 1080</td><td class="num">2</td></tr>
+            <tr><td><span class="lang-en">Meta feed, portrait</span><span class="lang-no">Meta feed, portrett</span></td><td class="num">1080 × 1350</td><td class="num">1</td></tr>
+            <tr><td><span class="lang-en">Story / Reel still</span><span class="lang-no">Story / Reel stillbilde</span></td><td class="num">1080 × 1920</td><td class="num">1</td></tr>
+            <tr><td><span class="lang-en">LinkedIn single image</span><span class="lang-no">LinkedIn enkeltbilde</span></td><td class="num">1200 × 627</td><td class="num">1</td></tr>
+            <tr><td><span class="lang-en">Display, MPU</span><span class="lang-no">Display, MPU</span></td><td class="num">300 × 250</td><td class="num">1</td></tr>
+            <tr><td><span class="lang-en">Display, leaderboard</span><span class="lang-no">Display, toppbanner</span></td><td class="num">980 × 240</td><td class="num">1</td></tr>
+          </tbody>
+        </table>
+        <p class="lang-en">Each one shows: campaign lockup, partner logo zone, one approved claim, one call to action, and the landing page URL. Establish the co-branding rule here and keep it forever — the campaign mark leads, the partner mark sits in a fixed “In partnership with / I samarbeid med” position, same position in every format for every partner.</p>
+        <p class="lang-no">Hver enkelt viser: kampanjelogo, sone for partnerlogo, én godkjent påstand, én handlingsoppfordring og URL til landingssiden. Etabler samprofileringsregelen her og hold den for alltid — kampanjemerket leder, partnermerket ligger i en fast «I samarbeid med / In partnership with»-posisjon, samme posisjon i hvert format for hver partner.</p>
+      </div>
+
+      <div class="phase">
+        <h3>1.2 <span class="lang-en">Video example, 20–30 seconds</span><span class="lang-no">Videoeksempel, 20–30 sekunder</span></h3>
+        <p class="lang-en">Motion graphics or animated stills are fine at this stage — this is a pitch prop, not a broadcast asset. It needs burnt-in subtitles, because silent autoplay is the default on Meta. Deliver 9:16 and 1:1, with a three-second end card carrying the campaign lockup, the URL and a QR code.</p>
+        <p class="lang-no">Bevegelsesgrafikk eller animerte stillbilder holder på dette stadiet — dette er et salgsverktøy, ikke en reklamefilm. Den må ha innbrente undertekster, fordi lydløs autoplay er standard på Meta. Lever 9:16 og 1:1, med et tre sekunders sluttbilde med kampanjelogo, URL og QR-kode.</p>
+      </div>
+
+      <div class="phase">
+        <h3>1.3 <span class="lang-en">Leader video template kit</span><span class="lang-no">Malpakke for ledervideo</span></h3>
+        <p class="lang-en">The highest-value item in the whole pitch, because it lets a CEO say in their own words why they joined. The kit contains:</p>
+        <p class="lang-no">Det mest verdifulle elementet i hele salgsmøtet, fordi det lar en toppleder si med egne ord hvorfor de ble med. Pakken inneholder:</p>
+        <ul>
+          <li><span class="lang-en">Intro plate (3s) and outro plate (4s) with campaign lockup, partner logo slot and URL</span><span class="lang-no">Introplate (3 s) og utroplate (4 s) med kampanjelogo, plass til partnerlogo og URL</span></li>
+          <li><span class="lang-en">Lower-third name and title plate</span><span class="lang-no">Navne- og tittelplate (lower third)</span></li>
+          <li><span class="lang-en">Subtitle style spec: font, size, safe area, Norwegian and English</span><span class="lang-no">Spesifikasjon for undertekst: skrift, størrelse, sikker sone, norsk og engelsk</span></li>
+          <li><span class="lang-en">A one-page shooting guide for the partner: a phone is fine, shoot horizontal <em>and</em> vertical takes, framing, window light, external mic or a quiet room, 60–90 seconds</span><span class="lang-no">En enkelt sides opptaksguide til partneren: mobil er greit, film både horisontalt <em>og</em> vertikalt, utsnitt, vinduslys, ekstern mikrofon eller stille rom, 60–90 sekunder</span></li>
+          <li><span class="lang-en">Script scaffold with three prompts: why we joined · what we ask of our people · what we want for our children</span><span class="lang-no">Manusskjelett med tre spørsmål: hvorfor vi ble med · hva vi ber våre ansatte om · hva vi ønsker for barna våre</span></li>
+        </ul>
+      </div>
+
+      <div class="phase">
+        <h3>1.4 <span class="lang-en">Pitch deck slide inserts</span><span class="lang-no">Lysbilder til salgspresentasjonen</span></h3>
+        <p class="lang-en">The examples above mounted into device mockups — a phone in a feed, a desktop display — as slides that drop straight into <code>OneHumanRace_Pitch_v22.pptx</code> without reformatting.</p>
+        <p class="lang-no">Eksemplene over montert i enhetsmockups — mobil i en feed, skjerm på desktop — som lysbilder som settes rett inn i <code>OneHumanRace_Pitch_v22.pptx</code> uten reformatering.</p>
+      </div>
+
+      <div class="phase">
+        <h3>1.5 <span class="lang-en">Digital merch pack</span><span class="lang-no">Digital merch-pakke</span></h3>
+        <p class="lang-en">Physical merch cannot be printed, proofed and delivered in four weeks. So give partners something they can deploy the day they sign, with no production lead time:</p>
+        <p class="lang-no">Fysisk merch kan ikke trykkes, godkjennes og leveres på fire uker. Gi derfor partnerne noe de kan ta i bruk samme dag som de signerer, uten produksjonstid:</p>
+        <ul>
+          <li><span class="lang-en">Partner badge in three versions — light, dark, mono — as PNG and SVG, with a one-page usage rule sheet</span><span class="lang-no">Partnermerke i tre versjoner — lys, mørk, ensfarget — som PNG og SVG, med ett ark med bruksregler</span></li>
+          <li><span class="lang-en">LinkedIn cover, 1584 × 396, partner-editable</span><span class="lang-no">LinkedIn-toppbilde, 1584 × 396, redigerbart for partner</span></li>
+          <li><span class="lang-en">Email signature strip</span><span class="lang-no">Signaturstripe for e-post</span></li>
+          <li><span class="lang-en">Teams, Zoom and Meet background</span><span class="lang-no">Bakgrunn for Teams, Zoom og Meet</span></li>
+          <li><span class="lang-en">Instagram and Facebook profile frame plus story sticker</span><span class="lang-no">Profilramme for Instagram og Facebook, samt story-klistremerke</span></li>
+          <li><span class="lang-en">A4 poster for canteen and reception, print-at-home CMYK PDF</span><span class="lang-no">A4-plakat for kantine og resepsjon, CMYK-PDF for utskrift på kontoret</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="hr">
+
+    <!-- 5 -->
+    <section id="phase2">
+      <span class="sec-num">05</span>
+      <h2><span class="lang-en">Phase two: the production system</span><span class="lang-no">Fase to: produksjonssystemet</span></h2>
+      <p class="phase-when"><span class="lang-en">Weeks two and three</span><span class="lang-no">Uke to og tre</span></p>
+      <p class="lang-en">The point of this phase is that partner number twelve takes two hours, not two days.</p>
+      <p class="lang-no">Poenget med denne fasen er at partner nummer tolv tar to timer, ikke to dager.</p>
+
+      <h3><span class="lang-en">Master templates</span><span class="lang-no">Hovedmaler</span></h3>
+      <p class="lang-en">Build in Figma, or Illustrator and After Effects, with partner logo, partner name, language and call to action as swappable components. One change propagates to every size.</p>
+      <p class="lang-no">Bygg i Figma, eller Illustrator og After Effects, med partnerlogo, partnernavn, språk og handlingsoppfordring som utbyttbare komponenter. Én endring forplanter seg til alle størrelser.</p>
+
+      <h3><span class="lang-en">Full per-partner size matrix</span><span class="lang-no">Full størrelsesmatrise per partner</span></h3>
+      <p class="lang-en">Everything in 1.1, plus: 1200 × 628 link, 300 × 600 half page, 320 × 100 mobile banner, 970 × 250 billboard, a six-second 16:9 YouTube bumper, and half and full page A4 with 3 mm bleed for local newspapers.</p>
+      <p class="lang-no">Alt i 1.1, i tillegg til: 1200 × 628 lenke, 300 × 600 halvside, 320 × 100 mobilbanner, 970 × 250 billboard, seks sekunders 16:9 YouTube-bumper, samt halv og hel A4-side med 3 mm utfall for lokalaviser.</p>
+
+      <h3><span class="lang-en">Two languages, not one bilingual asset</span><span class="lang-no">To språk, ikke ett tospråklig element</span></h3>
+      <p class="lang-en">Every asset exists in Norwegian and in English as separate files. Never both languages in one layout.</p>
+      <p class="lang-no">Hvert element finnes på norsk og på engelsk som separate filer. Aldri begge språk i samme layout.</p>
+
+      <h3><span class="lang-en">File naming</span><span class="lang-no">Filnavn</span></h3>
+      <p class="lang-en">Use exactly this — the reporting depends on it.</p>
+      <p class="lang-no">Bruk nøyaktig dette — rapporteringen avhenger av det.</p>
+      <p><code>OHR_[PARTNER]_[NO|EN]_[format]_[BxH]_v[n].[ext]</code></p>
+      <p><code>OHR_BedriftAS_NO_story_1080x1920_v2.png</code></p>
+
+      <h3><span class="lang-en">UTM tagging</span><span class="lang-no">UTM-merking</span></h3>
+      <p><code>?utm_source=[channel]&amp;utm_medium=paid&amp;utm_campaign=ohr_[partner]&amp;utm_content=[asset]</code></p>
+      <div class="flag">
+        <span class="flag-label lang-en">This is not optional</span>
+        <span class="flag-label lang-no">Dette er ikke valgfritt</span>
+        <p class="lang-en">You have promised every partner that half their money goes to joint marketing. That is a promise you have to be able to <em>prove</em>, per partner, every month. Frode owns the tag sheet; the designer names files to match it. Without this, the 50% commitment is unverifiable — and a partner who cannot see their own spend does not renew.</p>
+        <p class="lang-no">Dere har lovet hver partner at halvparten av pengene går til felles markedsføring. Det er et løfte dere må kunne <em>dokumentere</em>, per partner, hver måned. Frode eier merkeoversikten; designeren navngir filer som matcher den. Uten dette er 50 %-forpliktelsen umulig å etterprøve — og en partner som ikke ser sitt eget forbruk, fornyer ikke.</p>
+      </div>
+
+      <h3><span class="lang-en">The monthly partner report</span><span class="lang-no">Den månedlige partnerrapporten</span></h3>
+      <p class="lang-en">The report is compiled by an AI agent that handles the manual campaign work, and issued to every partner each month. It shows their ads, their spend, and the traffic those ads sent to the landing page.</p>
+      <p class="lang-no">Rapporten settes sammen av en AI-agent som utfører det manuelle arbeidet i kampanjen, og sendes til hver partner hver måned. Den viser annonsene deres, forbruket deres, og trafikken annonsene sendte til landingssiden.</p>
+      <p class="lang-en">This makes the naming and tagging discipline above <em>more</em> critical, not less. An agent can only report what it can read. If a file is named off-convention or an ad runs without its partner tag, that spend is invisible to the report — and invisible spend, in a 50% commitment, looks like missing money.</p>
+      <p class="lang-no">Dette gjør navne- og merkedisiplinen over <em>mer</em> kritisk, ikke mindre. En agent kan bare rapportere det den kan lese. Hvis en fil er navngitt utenfor konvensjonen, eller en annonse kjører uten partnertaggen sin, er forbruket usynlig for rapporten — og usynlig forbruk, i en 50 %-forpliktelse, ser ut som penger som mangler.</p>
+      <p class="lang-en">Designer deliverable: the report template. One page, campaign-branded, with fixed positions for the partner logo, the period, spend against the 50% commitment, impressions and clicks per asset, landing page actions, and a footer stating the source of the figures.</p>
+      <p class="lang-no">Leveranse fra designer: rapportmalen. Én side, med kampanjeprofil, faste plasseringer for partnerlogo, periode, forbruk mot 50 %-forpliktelsen, visninger og klikk per element, handlinger på landingssiden, og en bunntekst som oppgir kilden til tallene.</p>
+      <div class="flag">
+        <span class="flag-label lang-en">One human signs it</span>
+        <span class="flag-label lang-no">Ett menneske signerer den</span>
+        <p class="lang-en">The agent can assemble the report; it should not be the last thing to look at it. These are financial figures sent to a paying partner about how their money was spent, and they have to reconcile against the actual invoices from Meta, Google and any print vendor. Frode — or a named person — checks the totals against the platform billing before anything goes out, and the report carries that name. If a figure is ever wrong and no human signed it, the campaign has a credibility problem in exactly the area where it cannot afford one.</p>
+        <p class="lang-no">Agenten kan sette sammen rapporten; den bør ikke være det siste leddet som ser på den. Dette er økonomiske tall sendt til en betalende partner om hvordan pengene deres er brukt, og de må stemme mot de faktiske fakturaene fra Meta, Google og eventuelle trykkerier. Frode — eller en navngitt person — kontrollerer totalene mot plattformenes fakturering før noe sendes ut, og rapporten bærer det navnet. Hvis et tall en gang er feil og ingen har signert det, har kampanjen et troverdighetsproblem nøyaktig på det området der den ikke kan tåle det.</p>
+      </div>
+
+      <h3><span class="lang-en">Delivery checklist</span><span class="lang-no">Leveringssjekkliste</span></h3>
+      <ul>
+        <li><span class="lang-en">Restraint on text in image for Meta; safe zones respected for Stories</span><span class="lang-no">Begrens tekst i bilde for Meta; hold sikre soner for Stories</span></li>
+        <li><span class="lang-en">Contrast: <code>#FF6B00</code> on white fails contrast for small text. Dark text on orange, not orange text on white, below 18pt.</span><span class="lang-no">Kontrast: <code>#FF6B00</code> på hvitt oppfyller ikke kontrastkrav for liten tekst. Mørk tekst på oransje, ikke oransje tekst på hvitt, under 18 pt.</span></li>
+        <li><span class="lang-en">Subtitles on every video, in the language of the ad</span><span class="lang-no">Undertekst på all video, på annonsens språk</span></li>
+      </ul>
+    </section>
+
+    <hr class="hr">
+
+    <!-- 6 -->
+    <section id="phase3">
+      <span class="sec-num">06</span>
+      <h2><span class="lang-en">Phase three: merch and partner portal</span><span class="lang-no">Fase tre: merch og partnerportal</span></h2>
+      <p class="phase-when"><span class="lang-en">After launch — but order proofs now</span><span class="lang-no">Etter lansering — men bestill prøver nå</span></p>
+
+      <h3><span class="lang-en">Physical merch, deliberately short list</span><span class="lang-no">Fysisk merch, bevisst kort liste</span></h3>
+      <p class="lang-en">Break room cup <em>(priority item — see below)</em>, t-shirt, hoodie, tote bag, enamel pin, sticker sheet, water bottle, lanyard, roll-up banner 85 × 200 cm, window decal, reception table card.</p>
+      <p class="lang-no">Pauseromskopp <em>(prioritert produkt — se under)</em>, t-skjorte, hettegenser, bærenett, emaljepin, klistremerkeark, drikkeflaske, nøkkelbånd, roll-up 85 × 200 cm, vindusdekor, bordkort til resepsjon.</p>
+      <p class="lang-en">Design constraint: every item must work with <em>no</em> partner logo — campaign-only stock we hand out — and in a co-branded version. Print-ready CMYK, with a spot-colour match for both brand colours. Ask the supplier for a Pantone bridge before you approve anything; screen-printed orange drifts.</p>
+      <p class="lang-no">Designbegrensning: hvert produkt må fungere <em>uten</em> partnerlogo — kampanjeeksemplarer vi deler ut — og i en samprofilert versjon. Trykkeklar CMYK, med spotfarge-match for begge merkefargene. Be leverandøren om en Pantone-bro før du godkjenner noe; silketrykk i oransje forskyver seg.</p>
+      <p class="lang-en">Get one supplier quote and one physical sample before ordering volume. That is a budget decision, not a design decision — Roy approves.</p>
+      <p class="lang-no">Skaff ett tilbud og én fysisk prøve før volumbestilling. Det er en budsjettbeslutning, ikke en designbeslutning — Roy godkjenner.</p>
+
+      <h3><span class="lang-en">The break room cup</span><span class="lang-no">Pauseromskoppen</span></h3>
+      <p class="lang-en">The strongest item on the list, because it is the only one nobody chooses to use. A t-shirt gets worn a few times; a cup by the coffee machine gets picked up several times a day by someone who did not opt in. That is repeated, low-effort exposure inside the organisation — the exact mechanism the campaign’s own research argues for.</p>
+      <p class="lang-no">Det sterkeste produktet på listen, fordi det er det eneste ingen velger å bruke. En t-skjorte brukes noen ganger; en kopp ved kaffemaskinen plukkes opp flere ganger om dagen av noen som ikke har meldt seg på. Det er gjentatt eksponering med lav terskel inne i organisasjonen — nøyaktig den mekanismen kampanjens egen forskning bygger på.</p>
+      <p class="lang-en">The placement is the coffee machine and the break room, not a canteen counter. That matters commercially: in smaller companies the break room is theirs, the cups in it are theirs, and there is no catering contractor in the way. It also means higher frequency — a canteen cup is a lunch, a coffee cup is four or five interruptions a day, and the break room is where colleagues stand next to each other while holding it.</p>
+      <p class="lang-no">Plasseringen er kaffemaskinen og pauserommet, ikke en kantinedisk. Det har kommersiell betydning: i mindre selskaper er pauserommet deres eget, koppene i det er deres egne, og ingen kantineleverandør står i veien. Det gir også høyere frekvens — en kantinekopp er en lunsj, en kaffekopp er fire–fem avbrudd om dagen, og pauserommet er der kolleger står ved siden av hverandre mens de holder den.</p>
+      <p class="lang-en">Layout: campaign lockup and one short line on one side, partner logo or mission statement on the other, so whoever sits opposite sees one of them whichever hand picked the cup up. One short line only — <code>99,9 % like. 100 % likeverdige.</code> works at cup scale; a paragraph does not.</p>
+      <p class="lang-no">Layout: kampanjelogo og én kort linje på én side, partnerlogo eller formålsformulering på den andre, slik at den som sitter overfor ser én av dem uansett hvilken hånd som tok koppen. Bare én kort linje — <code>99,9 % like. 100 % likeverdige.</code> fungerer i koppformat; et avsnitt gjør det ikke.</p>
+      <ul>
+        <li><span class="lang-en"><strong>Dishwasher durability decides everything.</strong> Canteen cups run hundreds of industrial wash cycles a year. Specify a fired in-glaze or on-glaze ceramic decal and get a wash-cycle count from the supplier in writing. A flaking message on a campaign about permanence argues the opposite of what we mean.</span><span class="lang-no"><strong>Oppvaskholdbarhet avgjør alt.</strong> Kantinekopper går flere hundre industrivask i året. Spesifiser innbrent dekor (in-glaze eller on-glaze) og få antall vaskesykluser skriftlig fra leverandøren. Et budskap som flasser av på en kampanje om det varige, argumenterer mot seg selv.</span></li>
+        <li><span class="lang-en"><strong>Orange is the hard colour in ceramics.</strong> <code>#FF6B00</code> and especially <code>#FF1493</code> shift in the kiln. Get one fired sample in hand before volume, and decide in advance whether a near-match is acceptable or whether the cup runs in one colour plus black.</span><span class="lang-no"><strong>Oransje er den vanskelige fargen i keramikk.</strong> <code>#FF6B00</code> og særlig <code>#FF1493</code> forskyver seg i ovnen. Skaff én brent prøve i hånden før volumbestilling, og bestem på forhånd om en tilnærmet match er godkjent, eller om koppen kjøres i én farge pluss sort.</span></li>
+        <li><span class="lang-en"><strong>Nothing on it can go stale.</strong> A cup outlives the campaign by years. No dates, no campaign year, and no placeholder URL.</span><span class="lang-no"><strong>Ingenting på den kan bli utdatert.</strong> En kopp lever år lenger enn kampanjen. Ingen datoer, ingen kampanjeår, og ingen midlertidig URL.</span></li>
+        <li><span class="lang-en"><strong>Small companies order small.</strong> A twenty-person break room needs twenty-five cups, not three hundred. Pick a print method with a low minimum order — fired ceramic transfers usually start around 36 to 50 units — or the smaller partners, who are the easiest ones to close, cannot buy the item at all.</span><span class="lang-no"><strong>Små selskaper bestiller lite.</strong> Et pauserom for tjue personer trenger tjuefem kopper, ikke tre hundre. Velg en trykkmetode med lavt minimumsantall — innbrente keramikktransfers starter vanligvis på rundt 36 til 50 enheter — ellers kan de mindre partnerne, som er de lettest å lande, ikke kjøpe produktet i det hele tatt.</span></li>
+        <li><span class="lang-en"><strong>The partner pays, and that is the selling point.</strong> Break room cups are already a line they replace anyway — cups chip, disappear and go home in bags. Sold as “your next cup order, co-branded” rather than campaign merch, it stays outside the 50% marketing split and comes out of a budget that is not competing with anything.</span><span class="lang-no"><strong>Partneren betaler, og det er selve salgspoenget.</strong> Kopper på pauserommet er allerede noe de fornyer uansett — kopper får hakk, forsvinner og blir med hjem i vesker. Solgt som «neste koppbestilling, samprofilert» framfor kampanjemerch, holder det seg utenfor 50 %-fordelingen og tas fra et budsjett som ikke konkurrerer med noe annet.</span></li>
+      </ul>
+      <p class="lang-en">Same logic extends to anything else in that room: the magnet or card on the fridge, a small sign above the machine, meeting-room glasses, water jugs. Prove the cup first, then offer the break room as a set.</p>
+      <p class="lang-no">Samme logikk gjelder alt annet i det rommet: magneten eller kortet på kjøleskapet, et lite skilt over maskinen, glass i møterom, vannkanner. Bevis koppen først, tilby pauserommet som et sett etterpå.</p>
+
+      <h3><span class="lang-en">Standard, and paid extra</span><span class="lang-no">Standard, og betalt tillegg</span></h3>
+      <p class="lang-en">Merch sits inside the partner package: a standard set included at every tier, and everything else purchased on top. For the designer this only matters in one way — every item needs a campaign-only version with no partner logo, because the standard set is what a partner receives before any co-branded order is placed.</p>
+      <p class="lang-no">Merch ligger inne i partnerpakken: et standardsett inkludert på alle nivåer, og alt annet kjøpt i tillegg. For designeren betyr det bare én ting — hvert produkt trenger en versjon med kun kampanjeprofil og uten partnerlogo, fordi standardsettet er det en partner mottar før noen samprofilert bestilling er gjort.</p>
+      <p class="lang-en">Proposed split, for Roy to approve. It is deliberately weighted so the standard set costs almost nothing to fulfil and the paid extras are the items a partner actually wants in volume.</p>
+      <p class="lang-no">Foreslått fordeling, til godkjenning hos Roy. Den er bevisst vektet slik at standardsettet nesten ikke koster noe å levere, mens de betalte tilleggene er produktene en partner faktisk vil ha i volum.</p>
+      <table>
+        <thead>
+          <tr>
+            <th><span class="lang-en">Included at every tier</span><span class="lang-no">Inkludert på alle nivåer</span></th>
+            <th><span class="lang-en">Purchased on top</span><span class="lang-no">Kjøpt i tillegg</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="lang-en">The full digital pack from 1.5 — badge, covers, signature, backgrounds, poster PDF</span><span class="lang-no">Hele den digitale pakken fra 1.5 — merke, toppbilder, signatur, bakgrunner, plakat-PDF</span></td>
+            <td><span class="lang-en">Break room cups, at their own volume</span><span class="lang-no">Pauseromskopper, i eget volum</span></td>
+          </tr>
+          <tr>
+            <td><span class="lang-en">Sticker sheet and a small pin allocation</span><span class="lang-no">Klistremerkeark og et lite antall pins</span></td>
+            <td><span class="lang-en">Apparel — t-shirts, hoodies — in staff quantities</span><span class="lang-no">Klær — t-skjorter, hettegensere — i antall til ansatte</span></td>
+          </tr>
+          <tr>
+            <td><span class="lang-en">One window decal and one reception table card</span><span class="lang-no">Én vindusdekor og ett bordkort til resepsjon</span></td>
+            <td><span class="lang-en">Roll-up banners beyond the first, per site</span><span class="lang-no">Roll-up utover den første, per lokasjon</span></td>
+          </tr>
+          <tr>
+            <td><span class="lang-en">One roll-up banner from Ally upward</span><span class="lang-no">Én roll-up fra Ally og oppover</span></td>
+            <td><span class="lang-en">Bottles, tote bags, lanyards for events</span><span class="lang-no">Flasker, bærenett, nøkkelbånd til arrangementer</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="lang-en">Keep the cup out of the standard set at every tier. It is the item worth ordering in volume, it comes out of a facilities budget rather than a marketing one, and giving away twenty of them removes the reason to buy three hundred.</p>
+      <p class="lang-no">Hold koppen utenfor standardsettet på alle nivåer. Det er produktet det er verdt å bestille i volum, det tas fra driftsbudsjettet framfor markedsbudsjettet, og å gi bort tjue av dem fjerner grunnen til å kjøpe tre hundre.</p>
+
+      <h3><span class="lang-en">Partner portal pack</span><span class="lang-no">Pakke til partnerportalen</span></h3>
+      <p class="lang-en">Delivered per partner as a folder they can download:</p>
+      <p class="lang-no">Leveres per partner som en mappe de kan laste ned:</p>
+      <ul>
+        <li><span class="lang-en">Their full ad set, both languages</span><span class="lang-no">Hele annonsesettet deres, på begge språk</span></li>
+        <li><span class="lang-en">Their badge and co-branded lockups</span><span class="lang-no">Merket deres og samprofilerte logokombinasjoner</span></li>
+        <li><span class="lang-en">Press release template for local media, plus one press-ready image at 300 dpi with caption and photo credit</span><span class="lang-no">Pressemeldingsmal for lokale medier, samt ett pressebilde i 300 dpi med bildetekst og fotokreditering</span></li>
+        <li><span class="lang-en">Employee comms pack: intro email, intranet post, poster, and a one-pager on what to say if a customer asks</span><span class="lang-no">Internkommunikasjonspakke: introduksjonsmail, intranettinnlegg, plakat og ett ark om hva man svarer hvis en kunde spør</span></li>
+        <li><span class="lang-en">A short guide to running their own Facebook post, with pre-written copy</span><span class="lang-no">En kort guide til å kjøre eget Facebook-innlegg, med ferdigskrevet tekst</span></li>
+        <li><span class="lang-en">Their monthly spend and traffic report — generated by the AI agent, checked and signed by a named person, on the designer’s template</span><span class="lang-no">Månedlig rapport over forbruk og trafikk — generert av AI-agenten, kontrollert og signert av en navngitt person, på designerens mal</span></li>
+      </ul>
+    </section>
+
+    <hr class="hr">
+
+    <!-- 7 -->
+    <section id="timeline">
+      <span class="sec-num">07</span>
+      <h2><span class="lang-en">Timeline</span><span class="lang-no">Tidsplan</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th><span class="lang-en">When</span><span class="lang-no">Når</span></th>
+            <th><span class="lang-en">Designer delivers</span><span class="lang-no">Designer leverer</span></th>
+            <th><span class="lang-en">What it unblocks</span><span class="lang-no">Hva det låser opp</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="lang-en">Week 1 · T-4</span><span class="lang-no">Uke 1 · T-4</span></td>
+            <td><span class="lang-en">Phase one complete: ad examples, video example, leader kit, deck inserts, digital merch</span><span class="lang-no">Fase én ferdig: annonseeksempler, videoeksempel, lederpakke, lysbilder, digital merch</span></td>
+            <td><span class="lang-en">Sales cannot pitch credibly without it</span><span class="lang-no">Salg kan ikke pitche troverdig uten</span></td>
+          </tr>
+          <tr>
+            <td><span class="lang-en">Week 2 · T-3</span><span class="lang-no">Uke 2 · T-3</span></td>
+            <td><span class="lang-en">Master templates built, full size matrix generated, first real partner set if anyone has signed</span><span class="lang-no">Hovedmaler bygget, full størrelsesmatrise generert, første reelle partnersett hvis noen har signert</span></td>
+            <td><span class="lang-en">Onboarding speed</span><span class="lang-no">Hastighet i onboarding</span></td>
+          </tr>
+          <tr>
+            <td><span class="lang-en">Week 3 · T-2</span><span class="lang-no">Uke 3 · T-2</span></td>
+            <td><span class="lang-en">Ad-to-page visual consistency pass, portal folder structure, merch proofs ordered</span><span class="lang-no">Visuell samsvarssjekk annonse mot side, mappestruktur for portal, merch-prøver bestilt</span></td>
+            <td><span class="lang-en">Click-through drop-off</span><span class="lang-no">Frafall etter klikk</span></td>
+          </tr>
+          <tr>
+            <td><span class="lang-en">Week 4 · T-1</span><span class="lang-no">Uke 4 · T-1</span></td>
+            <td><span class="lang-en">Freeze. Per-partner production only. QA every link and UTM. Launch-day social kit.</span><span class="lang-no">Frys. Kun produksjon per partner. Kvalitetssikre alle lenker og UTM-er. Sosial pakke til lanseringsdagen.</span></td>
+            <td><span class="lang-en">Launch</span><span class="lang-no">Lansering</span></td>
+          </tr>
+          <tr>
+            <td><span class="lang-en">From launch</span><span class="lang-no">Fra lansering</span></td>
+            <td><span class="lang-en">Production line: new partner in, ad set out within 48 hours. Monthly refresh of the best-performing creative.</span><span class="lang-no">Produksjonslinje: ny partner inn, annonsesett ut innen 48 timer. Månedlig fornyelse av best presterende materiell.</span></td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr class="hr">
+
+    <!-- 8 -->
+    <section id="todo">
+      <span class="sec-num">08</span>
+      <h2><span class="lang-en">Who does what before launch</span><span class="lang-no">Hvem gjør hva før lansering</span></h2>
+      <p class="lede lang-en">Tick items off as they close. Nothing saves — this is a shared reference, not a tracker.</p>
+      <p class="lede lang-no">Kryss av etter hvert som punkter lukkes. Ingenting lagres — dette er et felles referansedokument, ikke et styringsverktøy.</p>
+
+      <div class="owner">
+        <p class="owner-name">Roy Arne Hansen</p>
+        <p class="owner-role"><span class="lang-en">Owner and final approval</span><span class="lang-no">Eier og endelig godkjenning</span></p>
+        <ul class="check">
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Launch is confirmed as 1 October 2026. The landing page and the intro page still count down to 1 September and still print “Lansering 1. september 2026” — both need correcting today, because the old date has already passed.</span><span class="lang-no">Lansering er bekreftet til 1. oktober 2026. Landingssiden og introsiden teller fortsatt ned til 1. september og skriver fortsatt «Lansering 1. september 2026» — begge må rettes i dag, siden den gamle datoen allerede er passert.</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Replace the <code>ebosoh.github.io</code> partner order page with the final domain. An unrelated-looking URL costs conversions in a trust-based pitch.</span><span class="lang-no">Erstatt partnerbestillingssiden på <code>ebosoh.github.io</code> med endelig domene. En URL som ser urelatert ut koster konverteringer i et salg basert på tillit.</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Sign off all ad copy in both languages before it enters a layout</span><span class="lang-no">Godkjenn all annonsetekst på begge språk før den går inn i en layout</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Approve the science phrasing in section three, or supply an alternative</span><span class="lang-no">Godkjenn formuleringen av vitenskapen i punkt tre, eller foreslå et alternativ</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Set the merch budget ceiling and approve the supplier</span><span class="lang-no">Sett budsjettak for merch og godkjenn leverandør</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Decide whether the “247 joined” counter goes live and real, or comes off the page</span><span class="lang-no">Bestem om telleren «247 har blitt med» skal bli live og reell, eller fjernes fra siden</span></span></label></li>
+        </ul>
+      </div>
+
+      <div class="owner">
+        <p class="owner-name">Frode Melletun</p>
+        <p class="owner-role"><span class="lang-en">Sales and sponsors, with the sales team</span><span class="lang-no">Salg og sponsorer, med salgsteamet</span></p>
+        <ul class="check">
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Issue one campaign tag per partner at signing, from Hudson’s tag sheet, and pass the partner name to Hudson in the exact form it will appear in file names</span><span class="lang-no">Utsted én kampanjetagg per partner ved signering, fra Hudsons taggoversikt, og send partnernavnet til Hudson i nøyaktig den formen det vil ha i filnavn</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Get logo usage and co-branding permission written into the partner agreement</span><span class="lang-no">Få logobruk og samprofilering skrevet inn i partneravtalen</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Get leader-video consent into the same agreement — named individual, published likeness, purpose, retention period</span><span class="lang-no">Få samtykke til ledervideo inn i samme avtale — navngitt person, publisert bilde, formål, lagringstid</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Build the pitch flow around the phase one assets, and give the designer feedback from the first five meetings</span><span class="lang-no">Bygg salgsflyten rundt materiellet fra fase én, og gi designeren tilbakemelding fra de fem første møtene</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Verify each monthly report against the platform invoices and sign it. Hudson places the spend and the agent compiles the figures, so the person who checks them should not be the same person — that is a basic control, not a comment on anyone.</span><span class="lang-no">Kontroller hver månedsrapport mot plattformfakturaene og signer den. Hudson plasserer annonsekjøpet og agenten setter sammen tallene, så den som kontrollerer dem bør ikke være samme person — det er en grunnleggende kontrollrutine, ikke en bemerkning om noen.</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Own the monthly partner report: the AI agent generates it, but check the totals against the actual platform invoices and put your name on it before it goes out</span><span class="lang-no">Eier den månedlige partnerrapporten: AI-agenten genererer den, men kontroller totalene mot de faktiske plattformfakturaene og sett navnet ditt på den før den sendes</span></span></label></li>
+        </ul>
+      </div>
+
+      <div class="owner">
+        <p class="owner-name">Hudson</p>
+        <p class="owner-role"><span class="lang-en">Ad placement and AI tooling</span><span class="lang-no">Annonseplassering og AI-verktøy</span></p>
+        <ul class="check">
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Own the UTM tag sheet and the naming convention. You are the only person who can tell the designer that a file name is wrong before it costs a month of attribution.</span><span class="lang-no">Eier UTM-oversikten og navnekonvensjonen. Du er den eneste som kan si til designeren at et filnavn er feil før det koster en måned med sporing.</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Confirm the ad account structure. SaySomething’s own Business Manager with each partner added as a permitted advertiser keeps spend visible per partner in one place.</span><span class="lang-no">Bekreft strukturen for annonsekontoene. SaySomethings egen Business Manager med hver partner lagt til som godkjent annonsør holder forbruket synlig per partner på ett sted.</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Confirm what the agent can actually read: ad manager delivery data only, or billing as well. If it is delivery only, the verified spend figure has to come in manually each month and the 50% line in the report cannot be automated.</span><span class="lang-no">Bekreft hva agenten faktisk har tilgang til: kun leveringsdata fra annonseverktøyet, eller også fakturering. Hvis det bare er levering, må det verifiserte forbrukstallet inn manuelt hver måned, og 50 %-linjen i rapporten kan ikke automatiseres.</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Give the designer the exact field list the report template must hold, before the template is drawn. It is cheaper to design to the data than to retrofit the data to a layout.</span><span class="lang-no">Gi designeren den nøyaktige feltlisten rapportmalen må inneholde, før malen tegnes. Det er billigere å designe etter dataene enn å tilpasse dataene til en layout.</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Set the landing page conversion tracking so each of the four calls to action reports separately back to the partner whose ad produced it</span><span class="lang-no">Sett opp konverteringssporing på landingssiden slik at hver av de fire handlingsoppfordringene rapporteres separat tilbake til partneren hvis annonse skapte den</span></span></label></li>
+        </ul>
+      </div>
+
+      <div class="owner">
+        <p class="owner-name"><span class="lang-en">Designer</span><span class="lang-no">Designer</span></p>
+        <p class="owner-role"><span class="lang-en">All creative production</span><span class="lang-no">All kreativ produksjon</span></p>
+        <ul class="check">
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Confirm tools and handover format. A Figma library is preferred — sales needs to duplicate an asset, not commission one.</span><span class="lang-no">Bekreft verktøy og overleveringsformat. Et Figma-bibliotek foretrekkes — salg trenger å duplisere et element, ikke bestille et.</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Deliver phase one by end of week one</span><span class="lang-no">Lever fase én innen slutten av uke én</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Build the master templates before producing volume</span><span class="lang-no">Bygg hovedmalene før volumproduksjon</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Follow the file naming convention exactly</span><span class="lang-no">Følg navnekonvensjonen for filer nøyaktig</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Flag any asset where the approved copy does not fit, rather than rewriting it</span><span class="lang-no">Meld fra om elementer der godkjent tekst ikke passer, framfor å skrive den om</span></span></label></li>
+        </ul>
+      </div>
+
+      <div class="owner">
+        <p class="owner-name">Yolanda &amp; Hyacinth</p>
+        <p class="owner-role"><span class="lang-en">Co-founders, content and tone</span><span class="lang-no">Medgrunnleggere, innhold og tone</span></p>
+        <ul class="check">
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Review phase one for tone. The material states what is factual about our approach — that we measure effect and work from published science — without comparison to anyone else’s work.</span><span class="lang-no">Gjennomgå fase én for tone. Materiellet oppgir hva som er faktisk ved vår tilnærming — at vi måler effekt og arbeider ut fra publisert forskning — uten sammenligning med andres arbeid.</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Supply the neuroscience explainers for the programme calls to action — the forest path, the salsa dancer, the football team — in a form the designer can illustrate</span><span class="lang-no">Lever de nevrovitenskapelige forklaringene til programmenes handlingsoppfordringer — skogsstien, salsadanseren, fotballaget — i en form designeren kan illustrere</span></span></label></li>
+        </ul>
+      </div>
+
+      <div class="owner">
+        <p class="owner-name"><span class="lang-en">Landing page and web</span><span class="lang-no">Landingsside og web</span></p>
+        <p class="owner-role"><span class="lang-en">Where every ad sends people</span><span class="lang-no">Der alle annonser sender folk</span></p>
+        <ul class="check">
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Make each of the four calls to action separately trackable: the pledge, the newsletter, programme interest, and the parents’ community</span><span class="lang-no">Gjør hver av de fire handlingsoppfordringene sporbare hver for seg: løftet, nyhetsbrevet, interesse for programmene, og foreldrefellesskapet</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Capture UTM parameters into the Google Sheet so partner traffic is attributable</span><span class="lang-no">Fang opp UTM-parametere i Google-regnearket slik at partnertrafikk kan tilskrives</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Match the page to the ads visually. Someone who clicks an orange partner ad should land somewhere that looks like the same campaign.</span><span class="lang-no">Match siden visuelt til annonsene. Den som klikker en oransje partnerannonse skal lande et sted som ser ut som samme kampanje.</span></span></label></li>
+        </ul>
+      </div>
+
+      <div class="owner">
+        <p class="owner-name"><span class="lang-en">Translation and proofing</span><span class="lang-no">Oversettelse og korrektur</span></p>
+        <p class="owner-role"><span class="lang-en">Before production, not after</span><span class="lang-no">Før produksjon, ikke etter</span></p>
+        <ul class="check">
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">Native Norwegian proofread of all partner-facing copy</span><span class="lang-no">Norsk korrektur av all partnerrettet tekst, av morsmålsbruker</span></span></label></li>
+          <li><label><input type="checkbox"><span class="task"><span class="lang-en">English copy checked against the same claim discipline</span><span class="lang-no">Engelsk tekst kontrollert mot samme krav til påstander</span></span></label></li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="hr">
+
+    <!-- 9 -->
+    <section id="open">
+      <span class="sec-num">09</span>
+      <h2><span class="lang-en">Decisions and what remains</span><span class="lang-no">Beslutninger og det som står igjen</span></h2>
+      <p class="lang-en">Four of the five are closed. What follows is what remains.</p>
+      <p class="lang-no">Fire av fem er lukket. Det som følger er det som står igjen.</p>
+      <ol class="q-list">
+        <li><span class="lang-en"><strong>Launch date — closed.</strong> 1 October 2026, pushed from September. Every page still showing the old date has to be corrected today; the date it counts down to has already passed, which reads as an abandoned campaign to anyone who lands there.</span><span class="lang-no"><strong>Lanseringsdato — lukket.</strong> 1. oktober 2026, utsatt fra september. Alle sider som fortsatt viser den gamle datoen må rettes i dag; datoen de teller ned til er allerede passert, og det leses som en forlatt kampanje av alle som lander der.</span></li>
+        <li><span class="lang-en"><strong>Ad placement and reporting — closed.</strong> Hudson places the ads and builds the AI tooling. Two things still need his answer, both in his list in section eight: whether the agent can read billing or only delivery, and the field list the report template must carry. The second one blocks the designer.</span><span class="lang-no"><strong>Annonseplassering og rapportering — lukket.</strong> Hudson plasserer annonsene og bygger AI-verktøyene. To ting mangler fortsatt svar fra ham, begge i hans liste i punkt åtte: om agenten kan lese fakturering eller bare levering, og feltlisten rapportmalen må inneholde. Den siste blokkerer designeren.</span></li>
+        <li><span class="lang-en"><strong>Tiers — closed.</strong> The five-tier NOK set, listed in section two. The colours on the existing tier cards still need rebuilding in the brand palette.</span><span class="lang-no"><strong>Nivåer — lukket.</strong> Femtrinns NOK-settet, listet i punkt to. Fargene på dagens nivåkort må fortsatt bygges om i merkepaletten.</span></li>
+        <li><span class="lang-en"><strong>A real launch partner — in progress.</strong> Still the single highest-value unknown. Until one exists, the pitch examples run on a fictional company, and a prospect reading a fictional logo is being asked to imagine twice: the campaign, and someone else joining it.</span><span class="lang-no"><strong>En reell lanseringspartner — under arbeid.</strong> Fortsatt det mest verdifulle ukjente. Inntil en finnes, kjører salgseksemplene på et fiktivt selskap, og en kunde som ser en fiktiv logo blir bedt om å forestille seg to ting: kampanjen, og at noen andre blir med.</span></li>
+        <li><span class="lang-en"><strong>Merch model — closed in principle.</strong> A standard set inside the partner package, the rest purchased on top. The split itself is proposed in section six and needs Roy’s sign-off before the designer decides which items need a campaign-only version.</span><span class="lang-no"><strong>Merch-modell — lukket i prinsippet.</strong> Et standardsett inne i partnerpakken, resten kjøpt i tillegg. Selve fordelingen er foreslått i punkt seks og trenger Roys godkjenning før designeren avgjør hvilke produkter som trenger en versjon med kun kampanjeprofil.</span></li>
+        <li><span class="lang-en"><strong>Cup ownership — closed for the main case.</strong> The cup lives by the coffee machine in the break room, which in smaller companies they own outright, so no catering contractor is involved. Two follow-ons remain: pick a supplier with a low minimum order so a twenty-person office can actually buy, and decide the approach for large organisations where the kitchen is outsourced. In that second case the cup goes in through the facilities manager rather than the marketing contact — or the canteen operator becomes a partner in their own right, which is a larger opportunity than the merch item.</span><span class="lang-no"><strong>Eierskap til koppene — lukket for hovedtilfellet.</strong> Koppen står ved kaffemaskinen på pauserommet, som mindre selskaper eier selv, så ingen kantineleverandør er involvert. To oppfølgingspunkter står igjen: velg en leverandør med lavt minimumsantall slik at et kontor på tjue personer faktisk kan kjøpe, og bestem framgangsmåten for store organisasjoner der kjøkkenet er satt ut. I det andre tilfellet går koppen inn via driftsansvarlig framfor markedskontakten — eller kantineoperatøren blir partner i egen rett, som er en større mulighet enn selve merch-produktet.</span></li>
+      </ol>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <span class="lang-en">SaySomething · org. nr. 929 337 522 · Sofienberggata 3D, 0551 Oslo · saysomething.no</span>
+      <span class="lang-no">SaySomething · org.nr. 929 337 522 · Sofienberggata 3D, 0551 Oslo · saysomething.no</span>
+    </div>
+    <div>
+      <span class="lang-en">One Human Race — designer working plan, v9</span>
+      <span class="lang-no">One Human Race — arbeidsplan for designer, v9</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang){
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang === 'no' ? 'no' : 'en');
+    document.getElementById('btn-en').setAttribute('aria-pressed', lang === 'en');
+    document.getElementById('btn-no').setAttribute('aria-pressed', lang === 'no');
+  }
+  setLang('en');
+</script>
+
+</body>
+</html>
